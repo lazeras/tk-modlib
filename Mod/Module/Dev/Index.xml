@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+  <h1>Site Development Tools</h1>
+
+  <ul>
+    <li><a href="/admin/_dev/tailLog.html" target="_blank">Tail Site Log</a></li>
+    <li><a href="/admin/_dev/pageList.html">Static Page URL List</a></li>
+    <li><a href="/admin/_dev/migrate.html">SQL Migration</a></li>
+    <li choice="plugins"><a href="/admin/admin/plugin/manager.html">Plugin Manager</a></li>
+    <li choice="plugins"><a href="/admin/_dev/pluginHookList.html">Plugin Hook Method List</a></li>
+
+  </ul>
+  <p>&#160;</p>
+
+  <h1>Documentation / Testing</h1>
+  <ul>
+    <li><a href="/docs/API/index.html" target="_blank">Developer API</a></li>
+    <li><a href="/UnitTests/index.php" target="_blank">Unit Testing</a></li>
+  </ul>
+  <p>&#160;</p>
+
+  <h1>Admin Markup</h1>
+  <ul>
+    <li><a href="/admin/_dev/bui.html">Bootstrap UI</a></li>
+    <li><a href="/admin/_dev/type.html">Typography</a></li>
+    <li><a href="/admin/_dev/form.html">Form</a></li>
+    <li><a href="/admin/_dev/formTabs.html">Form Tabs</a></li>
+    <li><a href="/admin/_dev/formStatic.html">Static Form Renderer</a></li>
+    <li><a href="/admin/_dev/table.html">Tables</a></li>
+    <li><a href="/admin/_dev/icons.html">Icons</a></li>
+  </ul>
+  <p>&#160;</p>
+
+
+
+</div>
