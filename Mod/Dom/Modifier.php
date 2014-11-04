@@ -183,6 +183,7 @@ class Modifier extends \Tk\Object
      */
     private function traverse(\DOMNode $node)
     {
+        if (!$node) return;
         if ($node->nodeType == \XML_ELEMENT_NODE) {
             if ($node->nodeName == 'head') {
                 $this->head = $node;

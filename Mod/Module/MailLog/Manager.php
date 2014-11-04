@@ -4,7 +4,7 @@
  * @link http://www.tropotek.com/
  * @license Copyright 2005 Michael Mifsud
  */
-namespace Mail\Module\MailLog;
+namespace Mod\Module\MailLog;
 
 /**
  * Manager: Mail_Module_MailLog_Manager
@@ -12,10 +12,9 @@ namespace Mail\Module\MailLog;
  * Manage records in the `mailLog` SQL table.
  *
  * Use the following markup to call this module in the template:
- *   <module class="Mail_Module_MailLog_Manager"></module>
+ *   <module class="Mod_Module_MailLog_Manager"></module>
  *
  *
- * @package Mail\Module\MailLog
  */
 class Manager extends \Mod\Module
 {
@@ -82,7 +81,7 @@ class Manager extends \Mod\Module
     protected function getList()
     {
         $filter = $this->table->getFilterValues();
-        return \Mail\Db\Log::getMapper()->findFiltered($filter, $this->table->getDbTool('`created` DESC'));
+        return \Mod\Db\MailLog::getMapper()->findFiltered($filter, $this->table->getDbTool('`created` DESC'));
     }
 
 
@@ -155,7 +154,7 @@ class Send extends \Table\Action\Iface
     /**
      * Create a delete action
      *
-     * @return \Mail\Module\MailLog\Send
+     * @return \Mod\Module\MailLog\Manager
      */
     static function create()
     {
@@ -168,7 +167,7 @@ class Send extends \Table\Action\Iface
      * setConfirm
      *
      * @param string $str
-     * @return \Mail\Module\MailLog\Send
+     * @return \Mod\Module\MailLog\Manager
      */
     public function setConfirm($str)
     {

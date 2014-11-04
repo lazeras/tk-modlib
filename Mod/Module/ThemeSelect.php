@@ -80,7 +80,7 @@ class ThemeSelect extends \Mod\Module
             $template->setChoice('show');
         }
 
-        $template->appendJsUrl(\Tk\Url::create('/assets/tek-js/util.js'));
+        $template->appendJsUrl(\Tk\Url::create('/assets/tk-jslib/util.js'));
         $js = <<<JS
 jQuery(function($) {
   $('#_ThemeSelect_go').hide();

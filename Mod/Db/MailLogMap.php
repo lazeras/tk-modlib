@@ -4,20 +4,20 @@
  * @link http://www.tropotek.com/
  * @license Copyright 2005 Tropotek Development
  */
-namespace Mail\Db;
+namespace Mod\Db;
 
 /**
- * 
+ *
  *
  * @package Mail\Db
  */
-class LogMap extends \Tk\Db\Mapper
+class MailLogMap extends \Tk\Db\Mapper
 {
 
     /**
      * Create the data map
      *
-     * @return \Tk\Model\sDataMap
+     * @return \Tk\Model\DataMap
      */
     protected function makeDataMap()
     {

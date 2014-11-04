@@ -4,21 +4,20 @@
  * @link http://www.tropotek.com/
  * @license Copyright 2005 Michael Mifsud
  */
-namespace Mail\Module\MailLog;
+namespace Mod\Module\MailLog;
 use Mod\AdminPageInterface;
 
 /**
  * View:
  * To call this module use the following component markup in the template:
- *   <module class="Mail_Module_Log_View"></module>
+ *   <module class="Mod_Module_MailLog_View"></module>
  *
- * @package Mail\Module\MailLog
  */
 class View extends \Mod\Module
 {
 
     /**
-     * @var \Mail\Db\Log
+     * @var \Mod\Db\MailLog
      */
     protected $log = null;
 
@@ -33,7 +32,7 @@ class View extends \Mod\Module
 
         $this->addEvent('send', 'doSend');
         if ($this->getRequest()->get('logId') != null) {
-            $this->log = \Mail\Db\Log::getMapper()->find($this->getRequest()->get('logId'));
+            $this->log = \Mod\Db\MailLog::getMapper()->find($this->getRequest()->get('logId'));
         }
 
         $this->add(AdminPageInterface::PANEL_ACTIONS_LINKS,  \Mod\Menu\Item::create('Re-Send', $this->getUri()->set('send'), 'fa fa-envelope')->setCssClass('resend'));

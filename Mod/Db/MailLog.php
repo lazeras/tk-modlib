@@ -7,11 +7,12 @@
 namespace Mod\Db;
 
 /**
- * 
+ * This object is the base to log sent emails and keep
+ * an email log with re-send abilities.
  *
- * @package Mail\Db
+ *
  */
-class Log extends \Tk\Db\Model
+class MailLog extends \Tk\Db\Model
 {
     
     /**
@@ -91,7 +92,7 @@ class Log extends \Tk\Db\Model
      *
      * @param \Tk\Mail\Message $message
      * @param bool $isSent
-     * @return \Mail\Db\Log
+     * @return MailLog
      */
     static function gatewayCallback($message, $isSent)
     {
@@ -148,15 +149,14 @@ class Log extends \Tk\Db\Model
 }
 
 /**
- * A validator object for `Mail\Db\Log`
+ * A validator object for `EmailLog`
  *
- * @package Mail\Db
  */
-class LogValidator extends \Tk\Validator
+class MailLogValidator extends \Tk\Validator
 {
 
     /**
-     * @var \Mail\Db\Log
+     * @var MailLog
      */
     protected $obj = null;
 
