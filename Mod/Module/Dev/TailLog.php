@@ -78,8 +78,8 @@ class TailLog extends \Mod\Module
 
         $url = $this->getUri()->set('refresh')->set('_disableLog');
 
-        $template->appendJsUrl(\Tk\Url::create('js/jquery.timing.min.js'));
-        $template->appendJsUrl(\Tk\Url::create('js/jquery.mousewheel.min.js'));
+        $template->appendJsUrl(\Tk\Url::create(dirname($this->getPage()->getThemeUrl()) . '/js/jquery.timing.min.js'));
+        $template->appendJsUrl(\Tk\Url::create(dirname($this->getPage()->getThemeUrl()) . '/js/jquery.mousewheel.min.js'));
         $js = <<<JS
 $(function() {
   var scrollEnable = true;
