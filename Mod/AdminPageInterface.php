@@ -120,25 +120,6 @@ abstract class AdminPageInterface extends \Mod\Page
      */
     private function initPanels($child)
     {
-        // CRUMBS
-        if (!$this->getContentChild()->exists(self::CRUMBS_ENABLE) || $this->getContentChild()->get(self::CRUMBS_ENABLE)) {
-            $this->addChild($this->crumbs->getRenderer(), $this->crumbs->getRenderVar());
-        }
-
-        // ACTIONS
-        if (!$child->exists(self::PANEL_ACTIONS_ENABLE) || $child->get(self::PANEL_ACTIONS_ENABLE)) {
-            $links = $child->get(self::PANEL_ACTIONS_LINKS);
-            if (!$links) $links = array();
-            if (!count($links) || $links[0]->text != 'Back' ) {
-                $back = \Mod\Menu\Item::create('Back', $this->getBackUrl(), 'fa fa-arrow-left');
-                $a1 = array($back);
-                $links = array_merge($a1, $links);
-            }
-            if (count($links)) {
-                $this->getActionPanel()->addItem($links);
-            }
-            $this->addChild($this->getActionPanel()->getRenderer(), $this->getActionPanel()->getRenderVar());
-        }
 
         // BORDER BOX
         // Create an independent border Box
@@ -160,6 +141,30 @@ abstract class AdminPageInterface extends \Mod\Page
             $contentPanel->setPadding($padding);
             $child->addChild($contentPanel);
         }
+
+        if (!$this->getConfig()->getUser()) {
+            return;
+        }
+
+        // CRUMBS
+        if (!$this->getContentChild()->exists(self::CRUMBS_ENABLE) || $this->getContentChild()->get(self::CRUMBS_ENABLE)) {
+            $this->addChild($this->crumbs->getRenderer(), $this->crumbs->getRenderVar());
+        }
+
+        // ACTIONS
+        if (!$child->exists(self::PANEL_ACTIONS_ENABLE) || $child->get(self::PANEL_ACTIONS_ENABLE)) {
+            $links = $child->get(self::PANEL_ACTIONS_LINKS);
+            if (!$links) $links = array();
+            if (!count($links) || $links[0]->text != 'Back' ) {
+                $back = \Mod\Menu\Item::create('Back', $this->getBackUrl(), 'fa fa-arrow-left');
+                $a1 = array($back);
+                $links = array_merge($a1, $links);
+            }
+            if (count($links)) {
+                $this->getActionPanel()->addItem($links);
+            }
+            $this->addChild($this->getActionPanel()->getRenderer(), $this->getActionPanel()->getRenderVar());
+        }
     }
 
 
@@ -168,13 +173,15 @@ abstract class AdminPageInterface extends \Mod\Page
      */
     public function setup()
     {
-        if (!$this->getConfig()->getUser()) {
-            return parent::setup();
-        }
         if ($this->getContentChild()) {
             $this->initPanels($this->getContentChild());
         }
+
+
         $r = parent::setup();
+        if (!$this->getConfig()->getUser()) {
+            return $r;
+        }
 
         // CRUMBS
         if (!$this->getContentChild()->exists(self::CRUMBS_ENABLE) || $this->getContentChild()->get(self::CRUMBS_ENABLE)) {

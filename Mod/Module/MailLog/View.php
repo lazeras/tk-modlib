@@ -31,8 +31,8 @@ class View extends \Mod\Module
         $this->setPageTitle('View Log');
 
         $this->addEvent('send', 'doSend');
-        if ($this->getRequest()->get('logId') != null) {
-            $this->log = \Mod\Db\MailLog::getMapper()->find($this->getRequest()->get('logId'));
+        if ($this->getRequest()->get('mailLogId') != null) {
+            $this->log = \Mod\Db\MailLog::getMapper()->find($this->getRequest()->get('mailLogId'));
         }
 
         $this->add(AdminPageInterface::PANEL_ACTIONS_LINKS,  \Mod\Menu\Item::create('Re-Send', $this->getUri()->set('send'), 'fa fa-envelope')->setCssClass('resend'));
