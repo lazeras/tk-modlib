@@ -22,12 +22,12 @@ class Ssl extends \Tk\Object implements \Tk\Controller\Iface
     public function update($obs)
     {
         tklog($this->getClassName() . '::update()');
-        if (!$this->getConfig()->exists('system.enableSsl')) {
+        $page = $this->getConfig()->get('res.page');
+        if (!$this->getConfig()->exists('system.enableSsl') || !$page instanceof \Mod\Page) {
             return;
         }
         // Ensure SSL security
         if ($this->getConfig()->get('res.page')) {
-            $page = $this->getConfig()->get('res.page');
             $this->secureRedirect($page->isSecure(), $this->getUri());
         }
     }
