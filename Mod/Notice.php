@@ -198,8 +198,8 @@ class Notice extends Renderer implements \Serializable
         $this->shown = true;
         $template = $this->getTemplate();
         $this->notify('show');
-        
-        
+
+
         foreach ($this->messages as $msgList) {
             foreach ($msgList as $data) {
                 $repeat = $template->getRepeat('row');

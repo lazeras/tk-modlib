@@ -67,11 +67,11 @@ abstract class AdminPageInterface extends \Mod\Page
         $this->setSecure(true);
         $this->setPermission(\Tk\Auth\Auth::P_ADMIN);
 
-        $this->setContentPanelClass($contentPanelClass);
-        $this->setActionPanelClass($actionPanelClass);
-
         // Setup Notice messages.
         $this->addChild(\Mod\Notice::getInstance(), self::VAR_PAGE_CONTENT_HEAD);
+
+        $this->setContentPanelClass($contentPanelClass);
+        $this->setActionPanelClass($actionPanelClass);
 
 
     }
