@@ -24,7 +24,7 @@ class Config extends \Tk\Config
      * @param string $sitePath
      * @param string $siteUrl
      */
-    protected function init($sitePath = '', $siteUrl = '')
+    protected function init($sitePath, $siteUrl = '')
     {
         parent::init($sitePath, $siteUrl);
 
