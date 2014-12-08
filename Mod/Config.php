@@ -17,7 +17,6 @@ class Config extends \Tk\Config
 {
 
 
-
     /**
      * Init the config
      *
@@ -28,9 +27,9 @@ class Config extends \Tk\Config
     {
         parent::init($sitePath, $siteUrl);
 
-        $this->parseConfigFile(dirname(dirname(__FILE__)).'/config/themes.php');
-        $this->parseConfigFile(dirname(dirname(__FILE__)).'/config/dispatch.php');
-        $this->parseConfigFile(dirname(dirname(__FILE__)).'/config/maillog.php');
+        $this->parseConfigFile(dirname(dirname(__FILE__)) . '/config/themes.php');
+        $this->parseConfigFile(dirname(dirname(__FILE__)) . '/config/dispatch.php');
+        $this->parseConfigFile(dirname(dirname(__FILE__)) . '/config/maillog.php');
 
     }
 
@@ -92,9 +91,9 @@ class Config extends \Tk\Config
      * Use this method to create an observer object and attach it
      * to a module on its initiation.
      *
-     * @param $targetClass
+     * @param        $targetClass
      * @param string $event
-     * @param $observer
+     * @param        $observer
      * @return $this
      */
     public function attachModuleObserver($targetClass, $event, $observer)
@@ -138,6 +137,7 @@ class Config extends \Tk\Config
             foreach ($arr as $obsArr) {
                 $event = $obsArr['event'];
                 $observerClass = $obsArr['observerClass'];
+
                 if (is_object($observerClass)) {
                     tklog('-> Attaching Module Observer Object `' . get_class($obsArr['observerClass']) . '` to `' . get_class($module) . '`');
                     $module->attach($observerClass, $event);
@@ -154,12 +154,12 @@ class Config extends \Tk\Config
 
     //-------------- FACTORY METHODS ------------------
     // List them in alphabetical order ....
-    
+
     /**
      * createPage
-     * 
+     *
      * @param string $pageClass
-     * @param array $params
+     * @param array  $params
      * @return \Mod\pageClass
      * @throws \Tk\Exception
      */
@@ -173,54 +173,55 @@ class Config extends \Tk\Config
             $theme = new \Mod\Theme();
             $this['system.theme.selected'] = $theme;
         }
-        
+
         $page = new $pageClass($theme);
 
         if (isset($params['themeFile'])) {
             $page->getTheme()->setThemeFile($params['themeFile']);
         }
-        
+
         // Test Url if is static page in theme folder
         $path = $this->getUri()->getPath(true);
         if (!preg_match('/\.html$/', $path)) {
             $path .= '/index.html';
         }
-        
+
         if (file_exists(dirname($page->getThemePath()) . $path)) {
             $page->getTheme()->setThemeFile($path);
         }
-        
+
         $this['res.page'] = $page;
-        
+
         // Init DomLoader
         $this->getDomLoader();
-        
+
         // Init page module
         $this->initModule($page);
-        
+
         return $page;
     }
 
 
     /**
      * Create child modules from parent module
-     * Using this method removes layzy loading of templates.
-     * Templates a loaded on page initalisation.
+     * Using this method removes lazy loading of templates.
+     * Templates a loaded on page initialisation.
      *
      * @param \Mod\Module $parent
      */
     function initModule(Module $parent)
     {
-        if (!$parent->getTemplate())  return;
+        if (!$parent->getTemplate())
+            return;
         $list = $parent->getTemplate()->getCaptureList();
         $children = array();
         if (isset($list['module'])) {
             $children = $list['module'];
         }
         $this->attachModuleObservers($parent);
-            $this['module.current'] = $parent;   // <---- Use this when in the observer to access the module ( $obs['module.current']; )
-            $this->notify(self::toNamespace($parent->getClassName()));
-            unset($this['module.current']);
+        $this['module.current'] = $parent;   // <---- Use this when in the observer to access the module ( $obs['module.current']; )
+        $this->notify(self::toNamespace($parent->getClassName()));
+        unset($this['module.current']);
 
 
         /* @var $node \DOMNode */
@@ -234,14 +235,14 @@ class Config extends \Tk\Config
             }
 
             // TODO: Enable inline templates
-//            $xml = trim($node->ownerDocument->saveXML($node));
-//            $inlineXml = false;
-//            foreach ($node->childNodes as $n) {
-//                if ($n->nodeType == \XML_ELEMENT_NODE) {
-//                    $inlineXml = true;
-//                    break;
-//                }
-//            }
+            //            $xml = trim($node->ownerDocument->saveXML($node));
+            //            $inlineXml = false;
+            //            foreach ($node->childNodes as $n) {
+            //                if ($n->nodeType == \XML_ELEMENT_NODE) {
+            //                    $inlineXml = true;
+            //                    break;
+            //                }
+            //            }
 
             $child->setInsertNode($node);
             $child->setInsertMethod(Module::INS_REPLACE);
@@ -250,7 +251,7 @@ class Config extends \Tk\Config
 
             foreach ($node->attributes as $attr) {
                 if (preg_match('/^(data|param)-(.+)/', $attr->nodeName, $regs)) {
-                    $method = 'set'.ucfirst($regs[2]);
+                    $method = 'set' . ucfirst($regs[2]);
                     if (method_exists($child, $method)) {
                         $child->$method($attr->nodeValue);
                     }
@@ -285,18 +286,13 @@ class Config extends \Tk\Config
         if (class_exists($class)) {
             $child = new $class();
         } else {
-            $child = new Module\Error('Module class not found: `'.$class.'`');
+            $child = new Module\Error('Module class not found: `' . $class . '`');
         }
         return $child;
     }
 
 
-
-
-
     // ---------------------- ACCESSORS ----------------------
-
-
 
 
     public function getCrumbs($title = 'Dashboard')
@@ -318,8 +314,6 @@ class Config extends \Tk\Config
         return $this['res.crumbs'];
 
     }
-
-
 
 
     /**
@@ -359,9 +353,9 @@ class Config extends \Tk\Config
                 $obj->add(new Dom\Filter\Lessc());          // Add LESS CSS compiler
             }
 
-//            if (class_exists('scssc')) {
-//                $obj->add(new Dom\Filter\Scssc());          // ADD SCSS CSS compiler
-//            }
+            //            if (class_exists('scssc')) {
+            //                $obj->add(new Dom\Filter\Scssc());          // ADD SCSS CSS compiler
+            //            }
 
             $obj->add(new Dom\Filter\JsLast());       // Move Javascript to bottom of body tag...
             if ($this->isDebug()) {
@@ -385,7 +379,6 @@ class Config extends \Tk\Config
         }
         return $this->get('res.domModifierPath');
     }
-
 
 
 }
