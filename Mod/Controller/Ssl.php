@@ -41,8 +41,8 @@ class Ssl extends \Tk\Object implements \Tk\Controller\Iface
     public function secureRedirect($isSecure, $requestUri)
     {
         if ($requestUri->getScheme() == 'https' && !$isSecure) {
-            $requestUri->setScheme('http');
-            $requestUri->redirect();
+//            $requestUri->setScheme('http');
+//            $requestUri->redirect();
         } elseif ($requestUri->getScheme() == 'http' && $isSecure) {
             $requestUri->setScheme('https');
             $requestUri->redirect();
