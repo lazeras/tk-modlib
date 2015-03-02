@@ -27,7 +27,7 @@ class Ssl extends \Tk\Object implements \Tk\Controller\Iface
             return;
         }
         // Ensure SSL security
-        if ($this->getConfig()->get('res.page') ) {
+        if ($this->getConfig()->get('res.page') ) { // <-- Fixed this line...
             $this->secureRedirect($page->isSecure(), $this->getUri());
         }
     }
