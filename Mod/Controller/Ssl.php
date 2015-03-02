@@ -23,11 +23,11 @@ class Ssl extends \Tk\Object implements \Tk\Controller\Iface
     {
         tklog($this->getClassName() . '::update()');
         $page = $this->getConfig()->get('res.page');
-        if (!$this->getConfig()->exists('system.enableSsl') || !$page instanceof \Mod\Page) {
+        if (!$this->getConfig()->get('system.enableSsl') || !$page instanceof \Mod\Page) {
             return;
         }
         // Ensure SSL security
-        if ($this->getConfig()->get('res.page')) {
+        if ($this->getConfig()->get('res.page') ) {
             $this->secureRedirect($page->isSecure(), $this->getUri());
         }
     }
@@ -40,10 +40,7 @@ class Ssl extends \Tk\Object implements \Tk\Controller\Iface
      */
     public function secureRedirect($isSecure, $requestUri)
     {
-        if ($requestUri->getScheme() == 'https' && !$isSecure) {
-//            $requestUri->setScheme('http');
-//            $requestUri->redirect();
-        } elseif ($requestUri->getScheme() == 'http' && $isSecure) {
+        if ($requestUri->getScheme() == 'http' && $isSecure) {
             $requestUri->setScheme('https');
             $requestUri->redirect();
         }
