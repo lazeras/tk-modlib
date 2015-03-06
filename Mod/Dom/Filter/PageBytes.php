@@ -83,13 +83,13 @@ class PageBytes extends Iface
         $c = $this->getCssBytes();
         $h = $this->getHtmlBytes();
         $t = $j + $c +$h;
-
-        \Tk\Log\Log::write('------------- Page Bandwidth -------------');
-        \Tk\Log\Log::write(sprintf('JS:        %10s        %10s b', \Tk\Path::bytes2String($j), $j));
-        \Tk\Log\Log::write(sprintf('CSS:       %10s        %10s b', \Tk\Path::bytes2String($c), $c));
-        \Tk\Log\Log::write(sprintf('HTML:      %10s        %10s b', \Tk\Path::bytes2String($h), $h));
-        \Tk\Log\Log::write(sprintf('TOTAL:     %10s        %10s b', \Tk\Path::bytes2String($t), $t));
-        \Tk\Log\Log::write('------------------------------------------');
+        $log = \Tk\Config::getInstance()->getLog()->getLogger();
+        $log->log('------------- Page Bandwidth -------------');
+        $log->log(sprintf('JS:        %10s        %10s b', \Tk\Path::bytes2String($j), $j));
+        $log->log(sprintf('CSS:       %10s        %10s b', \Tk\Path::bytes2String($c), $c));
+        $log->log(sprintf('HTML:      %10s        %10s b', \Tk\Path::bytes2String($h), $h));
+        $log->log(sprintf('TOTAL:     %10s        %10s b', \Tk\Path::bytes2String($t), $t));
+        $log->log('------------------------------------------');
 
     }
 
