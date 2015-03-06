@@ -84,7 +84,7 @@ class PageBytes extends Iface
         $h = $this->getHtmlBytes();
         $t = $j + $c +$h;
         $log = \Tk\Config::getInstance()->getLog()->getLogger();
-        $log->log('------------- Page Bandwidth -------------');
+        $log->log('INFO','------------- Page Bandwidth -------------');
         $log->log('INFO', sprintf('JS:        %10s        %10s b', \Tk\Path::bytes2String($j), $j));
         $log->log('INFO',sprintf('CSS:       %10s        %10s b', \Tk\Path::bytes2String($c), $c));
         $log->log('INFO',sprintf('HTML:      %10s        %10s b', \Tk\Path::bytes2String($h), $h));
