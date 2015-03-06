@@ -75,7 +75,7 @@ class Scssc extends Iface
                 $hrefPath = str_replace(\Tk\Config::getInstance()->getSiteUrl(), \Tk\Config::getInstance()->getSitePath(), $hrefUrl);
 
                 if (!is_file($hrefPath.'/'.$file)) {
-                    \Tk\Config::getInstance()->getLog()->getLogger()->log('SCSS/SASS File Not Found: ' . $hrefPath.'/'.$file);
+                    \Tk\Config::getInstance()->getLog()->getLogger()->log('INFO','SCSS/SASS File Not Found: ' . $hrefPath.'/'.$file);
                     return;
                 }
 
