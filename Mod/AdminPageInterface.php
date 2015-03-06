@@ -65,7 +65,8 @@ abstract class AdminPageInterface extends \Mod\Page
         parent::__construct($theme);
 
         $this->setSecure(true);
-        $this->setPermission(\Tk\Auth\Auth::P_ADMIN);
+        $adminRole_id = $this->getConfig()->getRbac()->Roles->returnId('admin');
+        $this->setPermission($adminRole_id);
 
         // Setup Notice messages.
         $this->addChild(\Mod\Notice::getInstance(), self::VAR_PAGE_CONTENT_HEAD);

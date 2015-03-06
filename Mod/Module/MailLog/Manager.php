@@ -75,7 +75,8 @@ class Manager extends \Mod\Module
 
     protected function hasPermission()
     {
-        return $this->getConfig()->getUser()->hasPermission(\Tk\Auth\Auth::P_ADMIN);
+        $adminRole_id = $this->getConfig()->getRbac()->Roles->returnId('admin');
+        return $this->getConfig()->getUser()->hasPermission($adminRole_id);
     }
 
     protected function getList()

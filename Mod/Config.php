@@ -41,7 +41,8 @@ class Config extends \Tk\Config
      */
     public function isAdmin()
     {
-        return $this->getUser()->hasPermission(\Tk\Auth\Auth::P_ADMIN);
+        $adminRole_id = $this->getConfig()->getRbac()->Roles->returnId('admin');
+        return $this->getUser()->hasPermission($adminRole_id);
     }
 
 
